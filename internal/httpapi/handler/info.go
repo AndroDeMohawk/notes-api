@@ -13,14 +13,14 @@ type Handler struct {
 
 func (h *Handler) HealthCheck() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		response.SendJson(w, `{"status" : "OK"}`, http.StatusOK)
+		response.SendJson(w, map[string]string{"status": "ok"}, http.StatusOK)
 	}
 }
 
 func (h *Handler) AppVersion() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		AppV := Handler{}
-		response.SendJson(w, AppV, http.StatusOK)
+
+		response.SendJson(w, map[string]string{"version": h.Version}, http.StatusOK)
 	}
 }
 
