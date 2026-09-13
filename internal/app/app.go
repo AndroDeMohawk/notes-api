@@ -21,5 +21,8 @@ func Run() {
 		Addr:    ":" + cfg.Port,
 		Handler: router,
 	}
-	httpServer.ListenAndServe()
+	err := httpServer.ListenAndServe()
+	if err != nil {
+		log.Fatal(err)
+	}
 }

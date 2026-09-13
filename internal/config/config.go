@@ -20,8 +20,12 @@ func LoadConfig() (*Config, error) {
 	if port == "" {
 		port = "8083"
 	}
+	version := os.Getenv("APP_VERSION")
+	if version == "" {
+		version = "dev"
+	}
 	return &Config{
-		Version: os.Getenv("APP_VERSION"),
+		Version: version,
 		Port:    port,
 	}, nil
 }
