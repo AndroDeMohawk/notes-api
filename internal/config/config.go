@@ -7,28 +7,18 @@ import (
 )
 
 type Config struct {
-	App AppConfig
-}
-
-type AppConfig struct {
 	Version string
 	Port    string
-}
-
-type Db struct {
-	Dsn string
 }
 
 func LoadConfig() (*Config, error) {
 	err := godotenv.Load(".env")
 	if err != nil {
-		panic(err.Error())
+		return nil, err
 	}
 
 	return &Config{
-		App: AppConfig{
-			Version: os.Getenv("APP_VERSION"),
-			Port:    os.Getenv("APP_PORT"),
-		},
+		Version: os.Getenv("APP_VERSION"),
+		Port:    os.Getenv("PORT"),
 	}, nil
 }

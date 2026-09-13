@@ -4,19 +4,19 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/AndroDeMohawk/notes-api/internal/config"
 	"github.com/go-chi/chi/v5"
-	"github.com/joho/godotenv"
 )
 
 func Run() {
 
-	err := godotenv.Load(".env")
+	config, err := config.LoadConfig()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Fatal(err)
 	}
 	router := chi.NewRouter()
 	httpServer := &http.Server{
-		Addr:    ":8082",
+		Addr:    ":" + config.Port,
 		Handler: router,
 	}
 	httpServer.ListenAndServe()
