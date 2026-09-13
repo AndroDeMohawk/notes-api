@@ -16,7 +16,7 @@ func Run() {
 	}
 	router := chi.NewRouter()
 	httpServer := &http.Server{
-		Addr:    ":8080",
+		Addr:    ":8082",
 		Handler: router,
 	}
 	httpServer.ListenAndServe()

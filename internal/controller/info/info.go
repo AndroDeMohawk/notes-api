@@ -3,21 +3,22 @@ package info
 import (
 	"net/http"
 	"os"
+
+	"github.com/AndroDeMohawk/notes-api/pkg/response"
 )
 
 type Handler struct {
 }
 
-func (h *Handler) HealthCheck() int {
-	resp, err := http.Get("http://127.0.0.1:8080/info")
-	if err != nil {
-		panic(err)
+func (h *Handler) HealthCheck() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		response.SendJson(w, `{"status" : "OK"}`, http.StatusOK)
 	}
-	return resp.StatusCode
 }
 
-func (h *Handler) Version() string {
-
-	AppV := os.Getenv("APP_VERSION")
-	return AppV
+func (h *Handler) Version() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		AppV := os.Getenv("APP_VERSION")
+		response.SendJson(w, AppV, http.StatusOK)
+	}
 }
