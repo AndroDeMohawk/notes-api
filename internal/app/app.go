@@ -16,7 +16,7 @@ func Run() {
 	}
 	router := chi.NewRouter()
 	httpServer := &http.Server{
-		Addr:    ":" + config.Port,
+		Addr:    config.Port,
 		Handler: router,
 	}
 	httpServer.ListenAndServe()

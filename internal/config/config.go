@@ -1,8 +1,6 @@
 package config
 
 import (
-	"os"
-
 	"github.com/joho/godotenv"
 )
 
@@ -18,7 +16,7 @@ func LoadConfig() (*Config, error) {
 	}
 
 	return &Config{
-		Version: os.Getenv("APP_VERSION"),
-		Port:    os.Getenv("PORT"),
+		Version: "dev",
+		Port:    ":8080",
 	}, nil
 }
