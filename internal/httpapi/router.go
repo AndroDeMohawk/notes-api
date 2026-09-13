@@ -11,7 +11,7 @@ func NewRouter(info *handler.Handler) http.Handler {
 	r := chi.NewRouter()
 	r.Route("/api", func(r chi.Router) {
 		r.Get("/health", info.HealthCheck())
-		r.Get("/version", info.Version())
+		r.Get("/version", info.AppVersion())
 	})
 	return r
 }

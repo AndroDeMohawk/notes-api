@@ -6,7 +6,7 @@ import (
 
 	"github.com/AndroDeMohawk/notes-api/internal/config"
 	"github.com/AndroDeMohawk/notes-api/internal/httpapi"
-	"github.com/go-chi/chi/v5"
+	"github.com/AndroDeMohawk/notes-api/internal/httpapi/handler"
 )
 
 func Run() {
@@ -15,13 +15,13 @@ func Run() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	router := chi.NewRouter()
-	httpapi.RegisterRoutes(router)
+	h := handler.NewHandler(cfg)
+	router := httpapi.NewRouter(h)
 	httpServer := &http.Server{
 		Addr:    ":" + cfg.Port,
 		Handler: router,
 	}
-	err := httpServer.ListenAndServe()
+	err = httpServer.ListenAndServe()
 	if err != nil {
 		log.Fatal(err)
 	}
