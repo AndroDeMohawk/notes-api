@@ -1,0 +1,9 @@
+-- migrations/000002_tasks.sql
+CREATE TABLE tasks (
+    id BIGSERIAL PRIMARY KEY,
+    user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL DEFAULT '',
+    status VARCHAR(50) NOT NULL DEFAULT 'NEW',
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+);

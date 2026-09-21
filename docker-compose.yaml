@@ -5,6 +5,7 @@ services:
     environment:
       POSTGRES_PASSWORD: 1010
     volumes:
-      - ./postgres-data:/var/lib/postgres/data
+      - ./postgres-data:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d
     ports:
       - "1111:5432"
